@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kasatria Data Visualization Assignment" />
+    <title>Kasatria Data Visualization</title>
+
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <div class="brand">
+          <h1>Kasatria Data Visualization</h1>
+          <p>Interactive 3D Data Visualization</p>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="welcome-section">
+          <h2>Explore Your Data</h2>
+          <p>
+            Sign in with Google to retrieve and visualize your spreadsheet data.
+          </p>
+
+          <button id="google-login-btn" type="button">
+            Sign in with Google
+          </button>
+
+          <p id="status-message" role="status">
+            Please sign in to continue.
+          </p>
+        </section>
+
+        <section id="visualization-section" hidden>
+          <h2>Data Visualization</h2>
+          <p id="record-count">No records loaded yet.</p>
+
+          <div id="visualization-container"></div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <p>Kasatria Technologies – Junior Software Developer Assignment</p>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

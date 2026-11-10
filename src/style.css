@@ -1,0 +1,1010 @@
+/* ==========================================================
+   Kasatria Data Visualization - style.css
+   Theme colour: INDIGO
+   Cards: white background, ONLY the border shows the net worth colour.
+   Matches: index.html, main.js, layouts.js, cards.js
+   Design only - no JavaScript or HTML changes needed.
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap');
+
+:root {
+    /* The one theme colour: indigo */
+    --indigo-950: #1e1b4b;
+    --indigo-800: #3730a3;
+    --indigo-600: #4f46e5;
+    --indigo-200: #c7d2fe;
+    --indigo-100: #e0e7ff;
+    --indigo-50: #eef2ff;
+
+    /* Neutrals */
+    --page: #f7f7fb;
+    --surface: #ffffff;
+    --text: #1f2037;
+    --text-soft: #6b6f8a;
+    --border: #dcdff0;
+
+    --shadow: 0 4px 16px rgba(30, 27, 75, 0.08);
+
+    --font: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+    --font-heading: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+/* ---------- Base ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--page);
+    line-height: 1.55;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+p {
+    color: var(--text-soft);
+}
+
+:focus-visible {
+    outline: 3px solid var(--indigo-200);
+    outline-offset: 2px;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+    position: relative;
+    padding: 24px 40px;
+    color: #ffffff;
+    background: var(--indigo-950);
+    overflow: hidden;
+}
+
+/* soft indigo shapes for character */
+.app-header::before,
+.app-header::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.app-header::before {
+    width: 260px;
+    height: 260px;
+    right: -60px;
+    top: -140px;
+    background: var(--indigo-800);
+    opacity: 0.7;
+}
+
+.app-header::after {
+    width: 140px;
+    height: 140px;
+    right: 150px;
+    bottom: -90px;
+    background: var(--indigo-600);
+    opacity: 0.55;
+}
+
+.brand {
+    position: relative;
+    z-index: 1;
+}
+
+.brand h1 {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+/* Same app icon as the login screen */
+.brand h1::before {
+    content: '';
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 13px;
+    background:
+        linear-gradient(#ffffff, #ffffff) 11px 11px / 10px 10px no-repeat,
+        linear-gradient(#ffffff, #ffffff) 23px 11px / 10px 10px no-repeat,
+        linear-gradient(#ffffff, #ffffff) 11px 23px / 10px 10px no-repeat,
+        linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)) 23px 23px / 10px 10px no-repeat,
+        var(--indigo-600);
+}
+
+.brand p {
+    margin: 4px 0 0 58px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--indigo-200);
+}
+
+/* ---------- Main ---------- */
+.main-content {
+    flex: 1;
+    width: 100%;
+    max-width: 1280px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+/* ---------- Welcome / login ---------- */
+.welcome-section {
+    position: relative;
+    max-width: 600px;
+    margin: 5vh auto 0;
+    padding: 56px 36px 48px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* indigo accent bar on top of the card */
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--indigo-600);
+}
+
+.welcome-section h2 {
+    margin: 0 0 12px;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--indigo-950);
+}
+
+.welcome-section p {
+    margin: 0 auto 28px;
+    max-width: 42ch;
+    font-size: 16px;
+}
+
+#google-login-btn {
+    padding: 15px 34px;
+    font: 700 15px/1 var(--font);
+    color: #ffffff;
+    background: var(--indigo-600);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+#google-login-btn:hover:not(:disabled) {
+    background: var(--indigo-800);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(79, 70, 229, 0.35);
+}
+
+#google-login-btn:disabled {
+    background: #a5a8d6;
+    box-shadow: none;
+    cursor: default;
+}
+
+#status-message {
+    margin: 22px 0 0;
+    min-height: 1.5em;
+    font-size: 14px;
+}
+
+/* ---------- Visualization section ---------- */
+#visualization-section[hidden] {
+    display: none;
+}
+
+#visualization-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+    margin-top: 0;
+    padding: 28px 32px 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(30, 27, 75, 0.14);
+    animation: section-reveal 0.6s ease backwards;
+}
+
+@keyframes section-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#visualization-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1 1 auto;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--indigo-950);
+}
+
+/* Small app icon before the title */
+#visualization-section h2::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border-radius: 12px;
+    background:
+        linear-gradient(#ffffff, #ffffff) 10px 10px / 9px 9px no-repeat,
+        linear-gradient(#ffffff, #ffffff) 21px 10px / 9px 9px no-repeat,
+        linear-gradient(#ffffff, #ffffff) 10px 21px / 9px 9px no-repeat,
+        linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)) 21px 21px / 9px 9px no-repeat,
+        var(--indigo-600);
+}
+
+#record-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--indigo-800);
+    background: var(--indigo-50);
+    border: 1px solid var(--indigo-100);
+    border-radius: 999px;
+}
+
+#record-count::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--indigo-600);
+}
+
+#visualization-container {
+    flex: 1 1 100%;
+    min-height: 400px;
+    margin-top: 8px;
+}
+
+/* ---------- 3D stage: soft dotted canvas ---------- */
+.visualization-stage {
+    position: relative;
+    width: 100%;
+    height: clamp(460px, 72vh, 780px);
+    margin-bottom: 30px; /* room for the layout bar that sits on the bottom edge */
+    background: #f3f4fb;
+    border: 1px solid var(--indigo-100);
+    border-radius: 18px;
+    cursor: grab;
+    user-select: none;
+}
+
+/* The 3D renderer layer: keep the cards inside the rounded panel */
+.visualization-stage > div:first-child {
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.visualization-stage:active {
+    cursor: grabbing;
+}
+
+/* ==========================================================
+   DATA CARDS
+   White background (original look). Only the border is coloured:
+   Red < $100K, Orange $100K-$200K, Green > $200K
+   ========================================================== */
+.data-card {
+    --tile: #cbd0e6; /* fallback border colour */
+
+    width: 180px;
+    height: 240px;
+    padding: 14px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--text);
+    background: #ffffff;
+    border: 4px solid var(--tile);
+    border-radius: 16px;
+    cursor: pointer;
+    will-change: transform;
+    contain: layout style;
+    /* Fade in when the cards first appear (opacity only, so it never
+       fights the position/rotation animation done in layouts.js) */
+    animation: card-fade-in 0.9s ease backwards;
+    transition: none;
+}
+
+.data-card:hover {
+    box-shadow: 0 6px 20px rgba(30, 27, 75, 0.3);
+}
+
+@keyframes card-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.net-worth-low {
+    --tile: #ef4444;
+}
+
+.net-worth-medium {
+    --tile: #f97316;
+}
+
+.net-worth-high {
+    --tile: #22c55e;
+}
+
+.card-photo {
+    width: 72px;
+    height: 72px;
+    flex: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    margin-bottom: 8px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: var(--indigo-100);
+}
+
+.card-name {
+    width: 100%;
+    margin: 2px 0 4px;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--indigo-950);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-details {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+}
+
+.card-interest {
+    width: 100%;
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--text-soft);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-net-worth {
+    width: 100%;
+    margin: auto 0 0;
+    padding-top: 8px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--indigo-950);
+    border-top: 1px solid var(--border);
+}
+
+/* ---------- Layout buttons ---------- */
+.layout-controls {
+    position: absolute;
+    left: 50%;
+    bottom: -28px;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(30, 27, 75, 0.2);
+}
+
+.layout-button {
+    padding: 10px 22px;
+    font: 700 14px/1 var(--font);
+    color: var(--text-soft);
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+}
+
+.layout-button:active {
+    transform: scale(0.95);
+}
+
+.layout-button:hover {
+    color: var(--indigo-800);
+    background: var(--indigo-50);
+}
+
+.layout-button.active {
+    color: #ffffff;
+    background: var(--indigo-600);
+}
+
+/* ---------- Zoom controls ---------- */
+.zoom-controls {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.zoom-control-button {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    position: relative;
+    font-size: 0; /* hide the text symbol, icon is drawn below */
+    line-height: 0;
+    color: var(--indigo-800);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.zoom-control-button:hover {
+    color: #ffffff;
+    background: var(--indigo-600);
+}
+
+.zoom-control-button:active {
+    transform: scale(0.94);
+}
+
+/* Icons (drawn as masks so they follow the button colour) */
+.zoom-control-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+    background: currentColor;
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    mask: var(--icon) center / contain no-repeat;
+}
+
+.zoom-control-button[title="Zoom In"] {
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
+}
+
+.zoom-control-button[title="Zoom Out"] {
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
+}
+
+.zoom-control-button[title="Reset View"] {
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8'/%3E%3Cpath d='M3 3v5h5'/%3E%3C/svg%3E");
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+    padding: 22px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+}
+
+.app-footer p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 768px) {
+    .app-header {
+        padding: 22px 20px;
+    }
+
+    .brand h1 {
+        font-size: 24px;
+    }
+
+    .main-content {
+        margin: 24px auto;
+        padding: 0 14px;
+    }
+
+    .welcome-section {
+        padding: 44px 22px 36px;
+    }
+
+    .welcome-section h2 {
+        font-size: 28px;
+    }
+
+    .visualization-stage {
+        height: clamp(440px, 66vh, 650px);
+        border-radius: 14px;
+    }
+
+    .zoom-controls {
+        right: 10px;
+        bottom: 10px;
+        gap: 6px;
+    }
+
+    .zoom-control-button {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+    .brand h1 {
+        font-size: 21px;
+    }
+
+    .visualization-stage {
+        height: 62vh;
+        min-height: 440px;
+    }
+
+    .zoom-controls {
+        right: 8px;
+        bottom: 10px;
+    }
+
+    .layout-controls {
+        width: calc(100% - 20px);
+        bottom: -26px;
+        gap: 2px;
+        padding: 4px;
+    }
+
+    .layout-button {
+        flex: 1;
+        padding: 10px 6px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+
+/* ==========================================================
+   TWO SCREENS: LOGIN  ->  DATA VISUALIZATION
+   No JavaScript change needed. main.js already un-hides
+   #visualization-section after Google login succeeds, and
+   the rules below use that to switch screens.
+   ========================================================== */
+
+/* ---------- Screen 1: Login (before sign in) ---------- */
+
+/* Hide the header on the login screen */
+body:not(:has(#visualization-section:not([hidden]))) .app-header {
+    display: none;
+}
+
+/* Centre the login card in the middle of the page */
+body:not(:has(#visualization-section:not([hidden]))) .main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section {
+    width: 100%;
+    margin: 0;
+}
+
+/* Google button with the Google "G" logo */
+#google-login-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 26px 10px 10px;
+}
+
+#google-login-btn::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3C/svg%3E");
+}
+
+/* ---------- Screen 2: Data visualization (after sign in) ---------- */
+
+/* Login card disappears once the data is loaded */
+body:has(#visualization-section:not([hidden])) .welcome-section {
+    display: none;
+}
+
+body:has(#visualization-section:not([hidden])) #visualization-section {
+    margin-top: 0;
+}
+
+
+/* ==========================================================
+   LOGIN SCREEN: split card (brand panel + sign-in form)
+   Only affects the login screen. CSS only.
+   ========================================================== */
+
+/* Soft background behind the card */
+body:not(:has(#visualization-section:not([hidden]))) {
+    background:
+        radial-gradient(50rem 32rem at 12% 8%, rgba(199, 210, 254, 0.6), transparent 60%),
+        radial-gradient(46rem 30rem at 92% 100%, rgba(224, 231, 255, 0.95), transparent 60%),
+        var(--page);
+    background-attachment: fixed;
+}
+
+/* The card: two columns */
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    grid-template-rows: 1fr auto auto auto auto 1fr;
+    max-width: 920px;
+    min-height: 520px;
+    padding: 0;
+    text-align: left;
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(30, 27, 75, 0.14);
+}
+
+/* Left: brand panel */
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section::before {
+    content: 'Table, sphere, helix and grid. Four ways to look at your data.';
+    grid-column: 1;
+    grid-row: 1 / -1;
+    position: static;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px 36px;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    background:
+        radial-gradient(circle at 86% 12%, rgba(79, 70, 229, 0.9) 0 70px, transparent 71px),
+        radial-gradient(circle at 12% 58%, rgba(55, 48, 163, 0.85) 0 120px, transparent 121px),
+        repeating-linear-gradient(0deg, rgba(199, 210, 254, 0.1) 0 1px, transparent 1px 36px),
+        repeating-linear-gradient(90deg, rgba(199, 210, 254, 0.1) 0 1px, transparent 1px 36px),
+        var(--indigo-950);
+}
+
+/* Brand name at the top of the left panel */
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section::after {
+    content: 'Kasatria Data Visualization';
+    position: absolute;
+    top: 32px;
+    left: 36px;
+    z-index: 1;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+}
+
+/* Right: form column */
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section > * {
+    grid-column: 2;
+    margin-left: 56px;
+    margin-right: 56px;
+}
+
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section h2 {
+    grid-row: 2;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 32px;
+    text-align: left;
+}
+
+/* Small app icon above the title */
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section h2::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+    border-radius: 14px;
+    background:
+        linear-gradient(#ffffff, #ffffff) 11px 11px / 10px 10px no-repeat,
+        linear-gradient(#ffffff, #ffffff) 27px 11px / 10px 10px no-repeat,
+        linear-gradient(#ffffff, #ffffff) 11px 27px / 10px 10px no-repeat,
+        linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)) 27px 27px / 10px 10px no-repeat,
+        var(--indigo-600);
+}
+
+body:not(:has(#visualization-section:not([hidden]))) .welcome-section > p:not(#status-message) {
+    grid-row: 3;
+    max-width: none;
+    margin-top: 0;
+    margin-bottom: 32px;
+    font-size: 15px;
+    text-align: left;
+}
+
+/* Google button: white, full width, like a real sign-in button */
+body:not(:has(#visualization-section:not([hidden]))) #google-login-btn {
+    grid-row: 4;
+    justify-self: stretch;
+    height: 54px;
+    padding: 0 20px;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text);
+    background: #ffffff;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(30, 27, 75, 0.08);
+}
+
+body:not(:has(#visualization-section:not([hidden]))) #google-login-btn::before {
+    width: 22px;
+    height: 22px;
+    border-radius: 0;
+    background-color: transparent;
+    background-size: 22px 22px;
+}
+
+body:not(:has(#visualization-section:not([hidden]))) #google-login-btn:hover:not(:disabled) {
+    color: var(--indigo-800);
+    background: var(--indigo-50);
+    border-color: var(--indigo-600);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.18);
+}
+
+body:not(:has(#visualization-section:not([hidden]))) #google-login-btn:disabled {
+    color: var(--text-soft);
+    background: #f1f2f8;
+    border-color: var(--border);
+}
+
+/* Status message with a small indicator dot */
+body:not(:has(#visualization-section:not([hidden]))) #status-message {
+    grid-row: 5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: none;
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 13px;
+    text-align: left;
+}
+
+body:not(:has(#visualization-section:not([hidden]))) #status-message::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--indigo-600);
+}
+
+/* Phones and small tablets: single column, brand strip on top */
+@media (max-width: 760px) {
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto 28px;
+        min-height: 0;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section::before {
+        content: '';
+        grid-column: 1;
+        grid-row: 1;
+        min-height: 130px;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section::after {
+        top: 28px;
+        left: 24px;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section > * {
+        grid-column: 1;
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section h2 {
+        margin-top: 28px;
+        font-size: 28px;
+    }
+}
+
+
+/* ==========================================================
+   VISUALIZATION SCREEN: same look as the login screen
+   ========================================================== */
+body:has(#visualization-section:not([hidden])) {
+    background:
+        radial-gradient(50rem 32rem at 12% 8%, rgba(199, 210, 254, 0.6), transparent 60%),
+        radial-gradient(46rem 30rem at 92% 100%, rgba(224, 231, 255, 0.95), transparent 60%),
+        var(--page);
+    background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+    #visualization-section {
+        padding: 20px 16px 4px;
+        border-radius: 18px;
+    }
+
+    #visualization-section h2 {
+        font-size: 22px;
+    }
+
+    .visualization-stage {
+        border-radius: 14px;
+    }
+
+    .visualization-stage > div:first-child {
+        border-radius: 14px;
+    }
+}
+
+
+/* ==========================================================
+   FULL-SCREEN VISUALIZATION (after sign in)
+   The card fills the whole window, with margin and padding.
+   ========================================================== */
+
+/* Page: header on top, card fills the rest, footer at the bottom */
+body:has(#visualization-section:not([hidden])) .main-content {
+    display: flex;
+    max-width: none;
+    margin: 0;
+    padding: 20px 24px;
+}
+
+/* The white card takes all the free space */
+body:has(#visualization-section:not([hidden])) #visualization-section {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 14px 16px;
+    min-width: 0;
+    padding: 24px 28px 6px;
+}
+
+body:has(#visualization-section:not([hidden])) #visualization-section h2 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+body:has(#visualization-section:not([hidden])) #record-count {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/* The stage grows to fill the card (it is #visualization-container) */
+body:has(#visualization-section:not([hidden])) #visualization-container {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: auto;
+    min-height: 420px;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    body:has(#visualization-section:not([hidden])) .main-content {
+        padding: 12px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section {
+        padding: 18px 16px 4px;
+    }
+}
+
+/* Phone: title on one row, record count under it */
+@media (max-width: 560px) {
+    body:has(#visualization-section:not([hidden])) #visualization-section {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section h2 {
+        grid-column: 1;
+    }
+
+    body:has(#visualization-section:not([hidden])) #record-count {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: start;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-container {
+        grid-row: 3;
+        min-height: 400px;
+    }
+}
+
+
+/* ==========================================================
+   HEADING FONT: Poppins for the main titles
+   ========================================================== */
+.brand h1,
+#visualization-section h2,
+.welcome-section h2 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+#visualization-section h2 {
+    font-size: 26px;
+}
