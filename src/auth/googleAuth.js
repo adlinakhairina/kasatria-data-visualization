@@ -1,9 +1,10 @@
+
 function waitForGoogleIdentityServices() {
     return new Promise((resolve, reject) => {
         let attempts = 0;
 
         const timer = setInterval(() => {
-            if (window.google?.accounts?.oauth2) {
+            if (window.google?.accounts?.id) {
                 clearInterval(timer);
                 resolve();
                 return;
@@ -13,47 +14,55 @@ function waitForGoogleIdentityServices() {
 
             if (attempts >= 100) {
                 clearInterval(timer);
-                reject(new Error('Google Identity Services failed to load. Please refresh the page.'));
+                reject(
+                    new Error(
+                        'Google Identity Services failed to load. Please refresh the page.'
+                    )
+                );
             }
         }, 50);
     });
 }
 
-export async function getGoogleAccessToken() {
+export async function initializeGoogleSignIn(onSuccess, onError) {
     await waitForGoogleIdentityServices();
 
-    return new Promise((resolve, reject) => {
-        const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
-        if (!clientId) {
-            reject(new Error('Google Client ID is missing. Please check your .env file.'));
-            return;
-        }
+    if (!clientId) {
+        throw new Error(
+            'Google Client ID is missing. Please check your .env file.'
+        );
+    }
 
-        const tokenClient = window.google.accounts.oauth2.initTokenClient({
-            client_id: clientId,
+    const buttonContainer = document.getElementById('google-login-btn');
 
-            scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+    if (!buttonContainer) {
+        throw new Error('Google sign-in button container was not found.');
+    }
 
-            callback: (response) => {
-                if (response.error) {
-                    reject(new Error(response.error_description || response.error));
-                    return;
-                }
+    window.google.accounts.id.initialize({
+        client_id: clientId,
 
-                if (!response.access_token) {
-                    reject(new Error('Google did not return an access token.'));
-                    return;
-                }
-
-                resolve(response.access_token);
-            },
-
-            error_callback: (error) => {
-                reject(new Error(error.message || 'Google authentication was cancelled.'));
+        callback: (response) => {
+            if (!response.credential) {
+                onError(new Error('Google did not return an ID token.'));
+                return;
             }
-        });
 
-        tokenClient.requestAccessToken();
+            onSuccess(response.credential);
+        },
+
+        auto_select: false,
+        cancel_on_tap_outside: true
+    });
+
+    window.google.accounts.id.renderButton(buttonContainer, {
+        type: 'standard',
+        theme: 'outline',
+        size: 'large',
+        text: 'signin_with',
+        shape: 'pill',
+        width: 300
     });
 }
