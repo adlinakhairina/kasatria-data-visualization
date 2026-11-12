@@ -57,12 +57,44 @@ export async function initializeGoogleSignIn(onSuccess, onError) {
         cancel_on_tap_outside: true
     });
 
-    window.google.accounts.id.renderButton(buttonContainer, {
-        type: 'standard',
-        theme: 'outline',
-        size: 'large',
-        text: 'signin_with',
-        shape: 'pill',
-        width: 300
+    // Calculate the Google button width based on the available screen space.
+    function renderGoogleButton() {
+        const isMobile = window.matchMedia(
+            '(max-width: 760px)'
+        ).matches;
+
+        const cardWidth = buttonContainer.parentElement.clientWidth;
+        const horizontalSpacing = isMobile ? 48 : 112;
+
+        const buttonWidth = Math.max(
+            200,
+            Math.min(300, cardWidth - horizontalSpacing)
+        );
+
+        // Clear the previous button before rendering a new one.
+        buttonContainer.innerHTML = '';
+
+        window.google.accounts.id.renderButton(buttonContainer, {
+            type: 'standard',
+            theme: 'outline',
+            size: 'large',
+            text: 'signin_with',
+            shape: 'pill',
+            width: buttonWidth
+        });
+    }
+
+    // Initial button rendering.
+    renderGoogleButton();
+
+    // Recalculate button width when the screen is resized or rotated.
+    let resizeTimer;
+
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(() => {
+            renderGoogleButton();
+        }, 200);
     });
 }

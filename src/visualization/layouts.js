@@ -24,26 +24,29 @@ let layoutAnimationId = null;
 let cameraAnimationId = null;
 
 // Initialize the visualization.
+
 export function initializeVisualization(records, container) {
+
+    // Clear the container and apply the visualization styling first.
+    container.innerHTML = '';
+    container.className = 'visualization-stage';
+
+    // Get the container dimensions after applying its CSS.
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(
         40,
-        container.clientWidth / Math.max(container.clientHeight, 1),
+        width / Math.max(height, 1),
         1,
         10000
     );
 
     renderer = new CSS3DRenderer();
 
-    renderer.setSize(
-        container.clientWidth,
-        container.clientHeight
-    );
-
-    container.innerHTML = '';
-    container.className = 'visualization-stage';
+    renderer.setSize(width, height);
 
     container.appendChild(renderer.domElement);
 

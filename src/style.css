@@ -185,30 +185,6 @@ p {
     font-size: 16px;
 }
 
-#google-login-btn {
-    padding: 15px 34px;
-    font: 700 15px/1 var(--font);
-    color: #ffffff;
-    background: var(--indigo-600);
-    border: none;
-    border-radius: 999px;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
-    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-}
-
-#google-login-btn:hover:not(:disabled) {
-    background: var(--indigo-800);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(79, 70, 229, 0.35);
-}
-
-#google-login-btn:disabled {
-    background: #a5a8d6;
-    box-shadow: none;
-    cursor: default;
-}
-
 #status-message {
     margin: 22px 0 0;
     min-height: 1.5em;
@@ -968,4 +944,272 @@ body:not(:has(#visualization-section:not([hidden]))) .welcome-section > #google-
     border: none;
     border-radius: 0;
     box-shadow: none;
+}
+
+
+/* ==========================================================
+   RESPONSIVE: LAPTOP + PHONE
+   ========================================================== */
+
+:root {
+    /* App icon that scales with its box (header, title) */
+    --app-mark:
+        linear-gradient(#ffffff, #ffffff) 32.3% 32.3% / 22.7% 22.7% no-repeat,
+        linear-gradient(#ffffff, #ffffff) 67.7% 32.3% / 22.7% 22.7% no-repeat,
+        linear-gradient(#ffffff, #ffffff) 32.3% 67.7% / 22.7% 22.7% no-repeat,
+        linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)) 67.7% 67.7% / 22.7% 22.7% no-repeat,
+        var(--indigo-600);
+}
+
+.brand h1::before,
+#visualization-section h2::before {
+    background: var(--app-mark);
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Use the real visible height on phones (address bar shows / hides) */
+body,
+#app {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* ---------- 3D stage: fills the card, works with touch ---------- */
+
+/* BUG FIX: the stage was centred and kept its small starting height.
+   It now stretches to fill the whole card. */
+body:has(#visualization-section:not([hidden])) #visualization-container {
+    align-self: stretch;
+}
+
+/* The 3D layer must not decide the stage size, so the stage can shrink too */
+.visualization-stage > div:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Finger drag / pinch moves the cards instead of scrolling the page */
+.visualization-stage {
+    touch-action: none;
+    overscroll-behavior: contain;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+}
+
+/* ---------- Tablet and phone (dashboard) ---------- */
+@media (max-width: 768px) {
+    .app-header {
+        padding: 14px 16px;
+    }
+
+    .app-header::before {
+        width: 170px;
+        height: 170px;
+        right: -60px;
+        top: -110px;
+    }
+
+    .app-header::after {
+        width: 90px;
+        height: 90px;
+        right: 90px;
+        bottom: -60px;
+    }
+
+    .brand h1 {
+        gap: 10px;
+        font-size: 18px;
+    }
+
+    .brand h1::before {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+    }
+
+    /* Hide the sub-title to save height */
+    .brand p {
+        display: none;
+    }
+
+    body:has(#visualization-section:not([hidden])) .main-content {
+        padding: 10px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section {
+        gap: 8px 10px;
+        padding: 14px 12px 4px;
+        border-radius: 18px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section h2 {
+        gap: 10px;
+        font-size: 20px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section h2::before {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #record-count {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-container {
+        min-height: 360px;
+        margin-bottom: 28px;
+        border-radius: 14px;
+    }
+
+    .layout-button {
+        padding: 10px 4px;
+        font-size: 12px;
+    }
+
+    .app-footer {
+        padding: 12px;
+    }
+
+    .app-footer p {
+        font-size: 12px;
+    }
+}
+
+/* ---------- Login screen on phone ---------- */
+@media (max-width: 760px) {
+    body:not(:has(#visualization-section:not([hidden]))) .main-content {
+        padding: 16px;
+    }
+
+    /* Google button: sits under the text with side space */
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section > #google-login-btn {
+        grid-column: 1;
+        margin: 0 22px;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section > #status-message {
+        grid-column: 1;
+    }
+}
+
+/* Very small phones: shrink the Google button a little so it fits */
+@media (max-width: 380px) {
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section > #google-login-btn {
+        transform-origin: left center;
+        margin-right: 0;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section h2 {
+        font-size: 24px;
+    }
+
+    .brand h1 {
+        font-size: 16px;
+    }
+}
+
+/* ---------- Phone turned sideways (short screens) ---------- */
+@media (max-height: 520px) and (orientation: landscape) {
+    .app-header {
+        padding: 8px 16px;
+    }
+
+    .app-header::before,
+    .app-header::after {
+        display: none;
+    }
+
+    .brand h1 {
+        font-size: 16px;
+    }
+
+    .brand h1::before {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+    }
+
+    .brand p,
+    .app-footer {
+        display: none;
+    }
+
+    body:has(#visualization-section:not([hidden])) .main-content {
+        padding: 8px 12px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section {
+        padding: 10px 14px 4px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section h2 {
+        font-size: 16px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-section h2::before {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+    }
+
+    body:has(#visualization-section:not([hidden])) #visualization-container {
+        min-height: 200px;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .main-content {
+        padding: 12px 16px;
+    }
+}
+
+/* ---------- FINAL FIX: Google login layout on mobile ---------- */
+@media (max-width: 900px) {
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 130px auto auto auto auto;
+        min-height: 0;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section::before {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section > * {
+        grid-column: 1;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section h2 {
+        grid-row: 2;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section > p:not(#status-message) {
+        grid-row: 3;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) .welcome-section > #google-login-btn {
+        grid-row: 4;
+        justify-self: center;
+        width: min(300px, calc(100% - 48px));
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    body:not(:has(#visualization-section:not([hidden]))) #status-message {
+        grid-row: 5;
+        margin: 20px 24px 24px;
+    }
 }
